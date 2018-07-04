@@ -1,0 +1,100 @@
+#random（随机数）、re（正则表达式）、time（时间）、urllib（网络请求）
+
+#readlines 
+#读取文件自动将文件内容分析成一个行的列表
+#例子：
+fh = open('xxx.py')#打开xxx文件
+for  line in  fh.readlines(): #for循环出fh的内容
+	print  line
+
+#split
+#通过指定分隔符对字符串进行切片，如果参数num 有指定值，则仅分隔 num 个子字符串
+str.split(str="", num)
+#str分隔符，num分隔次数
+
+#urllib#模块
+form urllib.request import urlopen
+#天气接口
+url=('http://www.weather.com.cn/data/cityinfo/%s.html'%citycode)
+        content=urlopen(url).read()
+
+#urlopen返回对象提供方法：
+
+-         read() , readline() ,readlines() , fileno() , close() ：对HTTPResponse类型数据进行操作
+
+-         info()：返回HTTPMessage对象，表示远程服务器返回的头信息
+
+-         getcode()：返回Http状态码。如果是http请求，200请求成功完成;404网址未找到
+
+-         geturl()：返回请求的url
+
+#使用代理 
+urllib.request.ProxyHandler(proxies=None)
+proxy = request.ProxyHandler({'http': '5.22.195.215:80'})  # 设置proxy
+
+#JSON编码的字符串转换回一个Python数据结构
+json.loads()
+data = json.loads(json_str)
+#将一个Python数据结构转换为JSON
+json.dumps()
+json_str = json.dumps(data)
+
+#数值运算模块 
+import math 
+#圆周率π：3.141592...
+math.pi
+#自然常数：2.718281...
+math.e
+#对x向上取整
+math.ceil(x)
+#对x向下取整
+math.floor(x)
+#得到x的y次方
+math.pow(x,y)
+#平方根
+math.sqrt(x)
+#绝对值
+math.fabs(x)
+
+
+#异常
+try:
+
+except:
+
+
+#正则表达式符号
+re.findall()
+
+#匹配数字
+	\d
+#匹配字母或数字或下划线或汉字
+	\w
+#匹配任意的空白符
+	\s
+#匹配字符串的开始，[a]的反义是[^a]，表示除a以外的任意字符。[^abcd]就是除abcd以外的任意字符。
+	^
+#匹配字符串的结束
+	$
+#任意不是空白符的字符  下同
+	\S
+#匹配任意非数字的字符
+	\D
+#匹配不是单词开头或结束的位置
+	\B
+
+? - #重复零次或一次
+{n,} - #重复n次或更多次
+{n,m} - #重复n到m次
+
+“|”相当于python中“or”的作用，它连接的两个表达式，只要满足其中之一，就会被算作匹配成功。
+
+#匹配有(或者没有(，3到4位数字，有),-或者没有),-，7到8位数字
+\(?\d{3,4}[),-]?\d{7,8}
+
+#lambda 表达可以被看做是一种匿名函数。它可以让你快速定义一个极度简单的单行函数。譬如这样一个实现三个数相加的函数：
+sum = lambda a,b,c:a+b+c
+print sum(1,2,3)
+
+
+# 作用域 global x 使这个x变为是一个全局的变量
