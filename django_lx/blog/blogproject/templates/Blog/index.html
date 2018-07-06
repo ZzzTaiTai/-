@@ -77,8 +77,7 @@
                         </h1>
                         <div class="entry-meta">
                             <span class="post-category"><a href="{% url 'Blog:category' post.category.pk %}">{{ post.category.name }}</a></span>
-                            <span class="post-date"><a href="{% url 'Blog:archives' year=post.created_time.year month=post.created_time.month %}"><time class="entry-date"
-                                                                      datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
+                            <span class="post-date"><a href="{% url 'Blog:archives' year=post.created_time.year month=post.created_time.month %}"><time class="entry-date">
                             <span class="post-author"><a href="{% url 'Blog:author' post.author.pk %}">{{post.author}}</a></span>
                             <span class="comments-link"><a href="{% url 'Blog:detail' post.pk %}#comment-list-panel">{{ post.comment_set.count }} 评论</a></span>
                             <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
@@ -97,7 +96,7 @@
 
                 
 
-                 
+                 <!--
                 {% if is_paginated %}
                 <div class="pagination-simple">
                     {% if page_obj.has_previous %}
@@ -109,23 +108,38 @@
                     {% endif %}
                 </div>
                 {% endif %}
-                
-                <!--
-                <div class="pagination">
-                    <ul>
-                        <li><a href="">1</a></li>
-                        <li><a href="">...</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li class="current"><a href="">6</a></li>
-                        <li><a href="">7</a></li>
-                        <li><a href="">8</a></li>
-                        <li><a href="">...</a></li>
-                        <li><a href="">11</a></li>
-                    </ul>
-                </div>
                 -->
+                {% if is_paginated %}
+                <div class="pagination-simple">
+                    
+                    {% if first %}
+                        <a href="?page=1">1</a>
+                    {% endif %}
+                    {% if left %}
+                        {% if left_has_more %}
+                            <span>...</span>
+                        {% endif %}
+                        {% for i in left %}
+                            <a href="?page={{ i }}">{{ i }}</a>
+                        {% endfor %}
+                    {% endif %}
+                        <a href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+                    {% if right %}
+                        {% for i in right %}
+                            <a href="?page={{ i }}">{{ i }}</a>
+                        {% endfor %}
+                        {% if right_has_more %}
+                            <span>...</span>
+                        {% endif %}
+                        {% if last %}
+                        <a href="?page=paginator.num_pages">{{ paginator.num_pages }}</a>
+                        {% endif %}
+                    
+                </div>
+                {% endif %}
+               {% endif %}
                 {% endblock main %}
+                
             </main>
             <aside class="col-md-4">
             {% block toc %}
