@@ -64,7 +64,29 @@ class IndexView(ListView):
         #分页页码列表，比如分了四页，那么就是 [1, 2, 3, 4]
         page_range = paginator.page_range
 
-        if page_number == 1:
+        right = page_range[page_number:page_number+2]
+        left=page_range[(page_number-3)if(page_number-3)>0 else 0 : page_number-1]
+
+        if right:
+            if right[-1] < total_pages - 1:
+                right_has_more = True
+            if right[-1] < total_pages:
+                last = True
+        if left:
+            if left[0] > 2:
+                left_has_more = True
+            if left[0] > 1:
+                first = True
+        data = {
+            'left': left,
+            'right': right,
+            'left_has_more': left_has_more,
+            'right_has_more': right_has_more,
+            'first': first,
+            'last': last,
+        }
+        return data
+        '''if page_number == 1:
             right = page_range[page_number:page_number+2]
 
             if right[-1] < total_pages - 1:
@@ -101,7 +123,7 @@ class IndexView(ListView):
         }
         return data
 
-
+'''
 class CategoryView(IndexView):
     def get_queryset(self):
         cate=get_object_or_404(Category,pk=self.kwargs.get('pk'))
